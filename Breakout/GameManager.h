@@ -16,6 +16,7 @@ public:
     void initialize();
     void update(float dt);
     void loseLife();
+    void removeBall(Ball* ball);
     void render();
     void levelComplete();
     void powerupEffect(POWERUPS pu, float t);
@@ -41,7 +42,7 @@ private:
 
     sf::RenderWindow* _window;
     Paddle* _paddle;
-    Ball* _ball;
+    std::vector<Ball*> _balls;
     BrickManager* _brickManager;
     PowerupManager* _powerupManager;
     MessagingSystem* _messagingSystem;

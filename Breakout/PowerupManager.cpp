@@ -1,8 +1,8 @@
 #include "PowerupManager.h"
 
 
-PowerupManager::PowerupManager(sf::RenderWindow* window, Paddle* paddle, Ball* ball)
-    : _window(window), _paddle(paddle), _ball(ball)
+PowerupManager::PowerupManager(sf::RenderWindow* window, Paddle* paddle, std::vector<Ball*> &balls)
+    : _window(window), _paddle(paddle), _balls(balls)
 {
 }
 
@@ -58,24 +58,26 @@ void PowerupManager::spawnPowerup()
 {
 
     // TODO finish this.
-    switch (rand() % 5)
+    switch (rand()%6)
     {
     case 0:
-        _powerups.push_back(new PowerupBigPaddle(_window, _paddle, _ball));
+        _powerups.push_back(new PowerupBigPaddle(_window, _paddle, _balls));
         break;
     case 1:
-        _powerups.push_back(new PowerupSlowBall(_window, _paddle, _ball));
+        _powerups.push_back(new PowerupSlowBall(_window, _paddle, _balls));
         break;
     case 2:
-        _powerups.push_back(new PowerupFastBall(_window, _paddle, _ball));
+        _powerups.push_back(new PowerupFastBall(_window, _paddle, _balls));
         break;
     case 3:
-        _powerups.push_back(new PowerupSmallPaddle(_window, _paddle, _ball));
+        _powerups.push_back(new PowerupSmallPaddle(_window, _paddle, _balls));
         break;
     case 4:
-        _powerups.push_back(new PowerupFireBall(_window, _paddle, _ball));
+        _powerups.push_back(new PowerupFireBall(_window, _paddle, _balls));
         break;
-    case 5:
+    default:
+        _powerups.push_back(new PowerupNewBall(_window, _paddle, _balls));
+        break;
        break;
     }
 
