@@ -9,8 +9,10 @@
 #include "PowerupSlowBall.h"
 #include "PowerupFastBall.h"
 #include "PowerupFireBall.h"
+#include "PowerupBonusBall.h"
 #include "Paddle.h"
 #include "Ball.h"
+
 
 
 class PowerupManager
