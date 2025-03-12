@@ -2,14 +2,14 @@
 #include <cmath>
 #include <iostream>
 
-PowerupBase::PowerupBase(sf::RenderWindow* window, Paddle* paddle, Ball* ball)
-    : _time(0.0f) // Initialize the time variable
+PowerupBase::PowerupBase(sf::RenderWindow* window, Paddle* paddle, std::vector<Ball*> & balls)
+    : _time(0.0f),_balls(balls) // Initialize the time variable
 {
     _window = window;
     _paddle = paddle;
     _sprite.setRadius(RADIUS);
     _isAlive = true;
-    _ball = ball;
+
 
     // Initial position and direction with some variability
     float initialX = rand() % window->getSize().x * 0.9 + window->getSize().x * 0.05;

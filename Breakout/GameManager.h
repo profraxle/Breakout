@@ -43,7 +43,7 @@ private:
 
     sf::RenderWindow* _window;
     Paddle* _paddle;
-    Ball* _ball;
+    std::vector<Ball*> _balls;
     BrickManager* _brickManager;
     PowerupManager* _powerupManager;
     MessagingSystem* _messagingSystem;

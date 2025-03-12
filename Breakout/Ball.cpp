@@ -6,8 +6,18 @@ Ball::Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager, b
     _timeWithPowerupEffect(0.f), _isFireBall(false), _isAlive(true), _direction({1,1})
 {
     _sprite.setRadius(RADIUS);
-    _sprite.setFillColor(sf::Color::Cyan);
-    _sprite.setPosition(0, 300);
+
+    if (!_isBonus) {
+        _sprite.setFillColor(sf::Color::Cyan);
+        _sprite.setPosition(0, 300);
+    }
+    else {
+        _direction = { -1, 1 };
+        _sprite.setFillColor(sf::Color::Green);
+        _sprite.setPosition(1000, 300);
+    }
+  
+
 }
 
 Ball::~Ball()
@@ -28,7 +38,12 @@ void Ball::update(float dt)
         else
         {
             setFireBall(0);    // disable fireball
-            _sprite.setFillColor(sf::Color::Cyan);  // back to normal colour.
+            if (!_isBonus) {
+                _sprite.setFillColor(sf::Color::Cyan);  // back to normal colour.
+            }
+            else {
+                _sprite.setFillColor(sf::Color::Green);
+            }
         }        
     }
 
@@ -62,9 +77,16 @@ void Ball::update(float dt)
     // lose life bounce
     if (position.y > windowDimensions.y)
     {
-        _sprite.setPosition(0, 300);
-        _direction = { 1, 1 };
-        _gameManager->loseLife();
+
+        if (!_isBonus) {
+            _sprite.setPosition(0, 300);
+            _direction = { 1, 1 };
+            _gameManager->loseLife();
+        }
+        else {
+            _gameManager->removeBall(this);
+            return;
+        }
     }
 
     // collision with paddle
